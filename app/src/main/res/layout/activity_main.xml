@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/menu"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/titleTV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alagard"
+        android:shadowColor="#000000"
+        android:shadowDx="15"
+        android:shadowDy="5"
+        android:shadowRadius="15"
+        android:text="MOONCHASE"
+        android:textColor="#E91010"
+        android:textSize="70sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.078" />
+
+    <ImageButton
+        android:id="@+id/settingsIV"
+        android:layout_width="45dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="4dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/grbx" />
+
+    <Button
+        android:id="@+id/startBTN"
+        android:layout_width="142dp"
+        android:layout_height="49dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/alagard"
+        android:shadowColor="#000000"
+        android:shadowDx="15"
+        android:shadowDy="5"
+        android:shadowRadius="15"
+        android:text="Start"
+        android:textColor="#E91010"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.53" />
+
+    <Button
+        android:id="@+id/loginAndRegisterBTN"
+        android:layout_width="560dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="148dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/alagard"
+        android:shadowColor="#000000"
+        android:shadowDx="15"
+        android:shadowDy="5"
+        android:shadowRadius="15"
+        android:text="LOG IN &amp; REGISTRATION"
+        android:textColor="#FFFFFF"
+        android:textSize="31sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleTV" />
+
+    <Button
+        android:id="@+id/logoutBTN"
+        android:layout_width="115dp"
+        android:layout_height="33dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/alagard"
+        android:text="LOG-OUT"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.052" />
+
+    <TextView
+        android:id="@+id/user_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/alagard"
+        android:shadowColor="#000000"
+        android:shadowDx="5"
+        android:shadowDy="2"
+        android:shadowRadius="5"
+        android:text="hello world"
+        android:textColor="#38099E"
+        app:layout_constraintBottom_toTopOf="@+id/logoutBTN"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "437235260869",
+    "project_id": "moonchase-11acd",
+    "storage_bucket": "moonchase-11acd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:437235260869:android:0612518672a1b6852b7fac",
+        "android_client_info": {
+          "package_name": "Haim.Cohen.Moonchase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuTlSMlXLlRQVC5b5fKrOdma5QBlI-ZNE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
