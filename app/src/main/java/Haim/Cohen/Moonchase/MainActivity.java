@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     TextView textView;
     FirebaseUser user;
 
+    Button startButton;
+
     //On Create method, Connects the initialized widgets to their respective ID's on the screen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         button = findViewById(R.id.logoutBTN);
         textView = findViewById(R.id.user_details);
+        startButton = findViewById(R.id.startBTN);
         user = auth.getCurrentUser();
         // If there's no User connected, the app takes you straight to the login page.
         if (user == null){
@@ -53,6 +56,15 @@ public class MainActivity extends AppCompatActivity {
                     finish();
             }
         });
+
+        startButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GameActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
 }
