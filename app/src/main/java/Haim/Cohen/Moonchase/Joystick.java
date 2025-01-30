@@ -4,6 +4,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import Haim.Cohen.Moonchase.Object.Utils;
+
 public class Joystick {
 
     private Paint outerCirclePaint;
@@ -37,7 +39,7 @@ public class Joystick {
         outerCirclePaint.setStyle(Paint.Style.FILL_AND_STROKE);
 
         innerCirclePaint = new Paint();
-        innerCirclePaint.setColor(Color.GRAY);
+        innerCirclePaint.setColor(Color.BLUE);
         innerCirclePaint.setStyle(Paint.Style.FILL_AND_STROKE);
     }
     public void draw(Canvas canvas) {
@@ -70,10 +72,12 @@ public class Joystick {
     }
 
     public boolean isPressed(double touchPositionX, double touchPositionY) {
-        joystickCenterToTouchDistance = Math.sqrt(
-                Math.pow(outerCircleCenterPositionX - touchPositionX, 2) +
-                Math.pow(outerCircleCenterPositionY - touchPositionY, 2)
-        );
+        joystickCenterToTouchDistance = Utils.getDistanceBetweenPoints(
+                outerCircleCenterPositionX,
+                outerCircleCenterPositionY,
+                touchPositionX,
+                touchPositionY);
+
         return joystickCenterToTouchDistance < outerCircleRadius;
     }
 
@@ -90,7 +94,7 @@ public class Joystick {
     public void setActuator(double touchPositionX, double touchPositionY) {
         double deltaX = touchPositionX - outerCircleCenterPositionX;
         double deltaY = touchPositionY - outerCircleCenterPositionY;
-        double deltaDistance = Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
+        double deltaDistance = Utils.getDistanceBetweenPoints(0, 0, deltaX, deltaY);
 
         if(deltaDistance < outerCircleRadius) {
             actuatorX = deltaX/outerCircleRadius;
