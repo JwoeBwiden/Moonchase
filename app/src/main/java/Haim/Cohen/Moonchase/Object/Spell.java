@@ -8,7 +8,7 @@ import Haim.Cohen.Moonchase.GameLoop;
 import Haim.Cohen.Moonchase.R;
 
 public class Spell extends Circle {
-    public static final double SPEED_PIXELS_PER_SECOND = 00.0;
+    public static final double SPEED_PIXELS_PER_SECOND = 600.0;
     public static final double MAX_SPEED = SPEED_PIXELS_PER_SECOND / GameLoop.MAX_UPS;
 
     public Spell(Context context, Player spellcaster) {

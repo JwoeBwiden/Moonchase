@@ -30,6 +30,8 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameLoop gameLoop;
     private List<Enemy> enemyList = new ArrayList<Enemy>();
     private List<Spell> spellList = new ArrayList<Spell>();
+    private int joystickPointerId = 0;
+    private int numberOfSpellsToCast = 0;
 
 
     public Game(Context context) {
@@ -54,15 +56,17 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public boolean onTouchEvent(MotionEvent event){
         // Handle touch event actions
-        switch(event.getAction()) {
+        switch(event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_POINTER_DOWN:
                 if (joystick.getIsPressed()) {
                     // Joystick was pressed before this event -> cast spell
-                    spellList.add(new Spell(getContext(), player));
+                    numberOfSpellsToCast++;
                 } else if (joystick.isPressed((double) event.getX(), (double) event.getY())) {
                     joystick.setIsPressed(true);
                 } else {
-                    // Joystick is pressed in this event -> setIsPressed(true)
+                    // Joystick is pressed in this event -> setIsPressed(true) and store ID
+                    joystickPointerId = event.getPointerId(event.getActionIndex());
                     spellList.add(new Spell(getContext(), player));
                 }
                 return true;
@@ -73,9 +77,13 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
                 }
                 return true;
             case MotionEvent.ACTION_UP:
-                // Joystick was letgo of -> setIsPressed(False) and resetActuator
-                joystick.setIsPressed(false);
-                joystick.resetActuator();
+            case MotionEvent.ACTION_POINTER_UP:
+                if(joystickPointerId == event.getPointerId(event.getActionIndex())) {
+                    // Joystick was let go of -> setIsPressed(False) and resetActuator
+                    joystick.setIsPressed(false);
+                    joystick.resetActuator();
+                }
+
                 return true;
         }
 
@@ -142,6 +150,11 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
         }
 
         // Update state of each enemy
+        while (numberOfSpellsToCast > 0)
+        {
+            spellList.add(new Spell(getContext(), player));
+            numberOfSpellsToCast--;
+        }
         for (Enemy enemy : enemyList) {
             enemy.update();
         }
@@ -151,12 +164,24 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
             spell.update();
         }
 
-        // Iterate through enemyList and check for collision between each enemy and the player
+        // Iterate through enemyList and check for collision between each enemy and the player and all spells (attacks)
         Iterator<Enemy> iteratorEnemy = enemyList.iterator();
         while (iteratorEnemy.hasNext()) {
-            if (Circle.isColliding(iteratorEnemy.next(), player)) {
+            Circle enemy = iteratorEnemy.next();
+            if (Circle.isColliding(enemy, player)) {
                 // Remove enemy if it collides with the player
                 iteratorEnemy.remove();
+                continue;
+            }
+            Iterator<Spell> iteratorSpell = spellList.iterator();
+            while (iteratorSpell.hasNext()) {
+                Circle spell = iteratorSpell.next();
+                //removespell if it collides with an enemy
+                if (Circle.isColliding(spell, enemy)) {
+                    iteratorSpell.remove();
+                    iteratorEnemy.remove();
+                    break;
+                }
             }
         }
     }
