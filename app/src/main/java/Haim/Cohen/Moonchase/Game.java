@@ -34,6 +34,7 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
     private int numberOfSpellsToCast = 0;
 
 
+
     public Game(Context context) {
         super(context);
 
@@ -44,7 +45,7 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
         gameLoop = new GameLoop(this, surfaceHolder);
 
         // Initialize game object
-        joystick = new Joystick(275, 700,70, 40);
+        joystick = new Joystick(275, 500,100, 75);
 
         //initialize player
         player = new Player(getContext(), joystick, 2*500, 500, 30);
@@ -122,23 +123,30 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void drawUPS(Canvas canvas) {
-      String averageUPS = Double.toString(gameLoop.getAverageUPS());
-      Paint paint = new Paint();
-      int color = ContextCompat.getColor(getContext(), R.color.magenta);
-      paint.setColor(color);
-      paint.setTextSize(50);
-      canvas.drawText("UPS: " + averageUPS, 100, 140, paint);
-    }
-
-    public void drawFPS(Canvas canvas){
-        String averageFPS = Double.toString(gameLoop.getAverageFPS());
+        String averageUPS = "UPS: " + gameLoop.getAverageUPS();
         Paint paint = new Paint();
         int color = ContextCompat.getColor(getContext(), R.color.magenta);
         paint.setColor(color);
         paint.setTextSize(50);
-        canvas.drawText("FPS: " + averageFPS, 100, 190, paint);
+
+        canvas.save(); // Save current state
+        canvas.rotate(90, 900, 100); // Rotate text 90 degrees at new position (100,100)
+        canvas.drawText(averageUPS, 900, 100, paint);
+        canvas.restore(); // Restore original state
     }
 
+    public void drawFPS(Canvas canvas) {
+        String averageFPS = "FPS: " + gameLoop.getAverageFPS();
+        Paint paint = new Paint();
+        int color = ContextCompat.getColor(getContext(), R.color.magenta);
+        paint.setColor(color);
+        paint.setTextSize(50);
+
+        canvas.save(); // Save current state
+        canvas.rotate(90, 950, 100); // Rotate text 90 degrees at new position (250,100)
+        canvas.drawText(averageFPS, 950, 100, paint);
+        canvas.restore(); // Restore original state
+    }
     public void update() {
         //update game state
         joystick.update();
@@ -186,4 +194,6 @@ class Game extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 }
+
+
 
